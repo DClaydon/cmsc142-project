@@ -44,8 +44,5 @@ int main(){
         else
             
             nopts[--move]--; // backtrack
-            // for (i = 1; i < move; i++) // print solution
-            //         printf("%2i ", option[i][nopts[i]]);
-            //     printf("\n");
     }
 }
