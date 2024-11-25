@@ -20,14 +20,12 @@ int main() {
             for (i = 1; i < move; i++) {
                 printf("%2i ", option[i][nopts[i]]);
             }
-            if (move > 1) {
-                printf("\n"); // Print a newline if there's something to display
-            }
+            printf("\n"); // Print a newline if there's something to display
+
 
             // Generate candidates for the next step
-            int start_candidate = (move == 1) ? 1 : option[move - 1][nopts[move - 1]] + 1;
-
-            for (candidate = start_candidate; candidate <= N; candidate++) {
+            // Instead of calculating start_candidate, just push the next number 
+            for (candidate = option[move - 1][nopts[move - 1]] + 1; candidate <= N; candidate++) {
                 option[move][++nopts[move]] = candidate; // Push candidate
             }
 
