@@ -1,48 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
-    int N = 4;
-    int nopts[N + 2];         // array of top of stacks
-    int option[N + 2][N + 2]; // array of stacks of options
+int main() {
+    int N = 4; // Total numbers
+    int nopts[N + 2];         // Array of top of stacks
+    int option[N + 2][N + 2]; // Array of stacks of options
     int start, move, i, candidate;
 
     move = start = 0;
     nopts[start] = 1;
 
-    while (nopts[start] > 0)
-    { // while dummy stack is not empty
+    while (nopts[start] > 0) { // While dummy stack is not empty
 
-        if (nopts[move] > 0)
-        { // else backtrack
+        if (nopts[move] > 0) { // Continue exploring
 
-            nopts[++move] = 0; // initialize new move
+            nopts[++move] = 0; // Initialize new move
 
-            if (move > N)
-            {                              // solution found!
-                for (i = 1; i < move; i++) // print solution
-                    printf("%2i ", option[i][nopts[i]]);
-                printf("\n");
+            // Print the combination at this point (if not empty)
+            for (i = 1; i < move; i++) {
+                printf("%2i ", option[i][nopts[i]]);
+            }
+            if (move > 1) {
+                printf("\n"); // Print a newline if there's something to display
             }
 
-            else
-            { // find candidates
+            // Generate candidates for the next step
+            int start_candidate = (move == 1) ? 1 : option[move - 1][nopts[move - 1]] + 1;
 
-                // consider N down to 1 as valid candidates
-                for (candidate = N; candidate >= 1; candidate--)
-                {
-                    for (i = move - 1; i >= 1; i--) // check for duplicates
-                        if (option[i][nopts[i]] == candidate)
-                            break;
-
-                    if (!(i >= 1))                               // no duplicates found
-                        option[move][++nopts[move]] = candidate; // push candidate
-                        
-                }
+            for (candidate = start_candidate; candidate <= N; candidate++) {
+                option[move][++nopts[move]] = candidate; // Push candidate
             }
+
+        } else {
+            nopts[--move]--; // Backtrack
         }
-        else
-            
-            nopts[--move]--; // backtrack
     }
+
+    return 0;
 }
