@@ -5,12 +5,25 @@ int main() {
     int N = 4;  // Number of elements
     int nopts[N + 2];         // Array of top of stacks
     int option[N + 2][N + 2]; // Array of stacks of options
-    int start, move, i, candidate;
+    int start, move, i, j, candidate;
 
     move = start = 0;
     nopts[start] = 1;
 
     while (nopts[start] > 0) { // While dummy stack is not empty
+        // Print the current state of the option array
+                        // printf("Current state of the 'option' array:\n");
+                        // for (i = 1; i <= N; i++) { // Rows
+                        //     for (j = 1; j <= N; j++) { // Columns
+                        //         if (j <= nopts[i]) { // Valid options
+                        //             printf("%2d ", option[i][j]);
+                        //         } else {
+                        //             printf(" . "); // Placeholder for empty slots
+                        //         }
+                        //     }
+                        //     printf("\n");
+                        // }
+                        // printf("\n");
 
         if (nopts[move] > 0) { // If there are candidates for the current move
 
@@ -24,6 +37,8 @@ int main() {
                     // Single condition for acceptance
                     if (move == 1 || candidate > option[move - 1][nopts[move - 1]]) {
                         option[move][++nopts[move]] = candidate; // Push candidate
+
+                        
                     }
                 }
             }
