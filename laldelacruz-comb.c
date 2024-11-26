@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-    int N = 4; // Total numbers
+    int N = 4;  // Number of elements
     int nopts[N + 2];         // Array of top of stacks
     int option[N + 2][N + 2]; // Array of stacks of options
     int start, move, i, candidate;
@@ -12,25 +12,30 @@ int main() {
 
     while (nopts[start] > 0) { // While dummy stack is not empty
 
-        if (nopts[move] > 0) { // Continue exploring
+        if (nopts[move] > 0) { // If there are candidates for the current move
 
             nopts[++move] = 0; // Initialize new move
 
-            // Print the combination at this point (if not empty)
-            for (i = 1; i < move; i++) {
-                printf("%2i ", option[i][nopts[i]]);
+            if (move > N) {
+                // Do nothing here; printing happens during backtracking
+            } else {
+                // Candidate selection (outer loop unchanged)
+                for (candidate = N; candidate >= 1; candidate--) { 
+                    // Single condition for acceptance
+                    if (move == 1 || candidate > option[move - 1][nopts[move - 1]]) {
+                        option[move][++nopts[move]] = candidate; // Push candidate
+                    }
+                }
             }
-            printf("\n"); // Print a newline if there's something to display
-
-
-            // Generate candidates for the next step
-            // Instead of calculating start_candidate, just push the next number 
-            for (candidate = option[move - 1][nopts[move - 1]] + 1; candidate <= N; candidate++) {
-                option[move][++nopts[move]] = candidate; // Push candidate
-            }
-
         } else {
-            nopts[--move]--; // Backtrack
+            // Backtrack: Print combination for current state
+            if (move > 1) { // Print combination if there's at least one element
+                for (i = 1; i < move; i++) {
+                    printf("%2i ", option[i][nopts[i]]);
+                }
+                printf("\n");
+            }
+            nopts[--move]--; // Pop stack
         }
     }
 
