@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main() {
-    int N = 1000;  // Number of elements
+    int N = 4;  // Number of elements
     int nopts[N + 2];         // Array of top of stacks
     int option[N + 2][N + 2]; // Array of stacks of options
     int start, move, i, candidate;
