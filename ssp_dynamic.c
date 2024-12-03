@@ -2,6 +2,15 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+/*
+Group members:
+Roy Allen Fernandez
+Jose Enrico Manalac
+Precious Anne Ramil
+Karl Kenneth Owen Olipas
+Laydon Albert L Dela cruz
+*/
+
 // Comparator function for qsort to sort in ascending order
 int compare(const void *a, const void *b) {
     return (*(int *)a - *(int *)b);
