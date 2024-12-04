@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
                             }
                         }
                     }
-                    if (solu == M)
+                    if (solu == M || M == 0)
                     {
                         for (int j = 1; j < move; j++)
                         {
