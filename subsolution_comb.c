@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
 {
     int k = atoi(argv[2]); // sum
 
+    // ARG[1] - array
     char *str = argv[1]; // array arg
     int arr[10];
     int count = 0;
@@ -22,8 +23,24 @@ int main(int argc, char *argv[])
 
     int N = sizeof(a) / sizeof(a[0]); // size of array
 
-    int subsol[3] = {5, 4, 2};
-    int subsol_size = sizeof(subsol) / sizeof(subsol[0]); // size of array
+    // ARG[3] - subsolution
+    char *str2 = argv[3]; // array arg
+    int arr2[10];
+    int count2 = 0;
+    char *token2 = strtok(str2, ","); // split the string into tokens
+    while (token2 != NULL)
+    {
+        arr2[count2++] = atoi(token2); // convert each token to an integer
+        token2 = strtok(NULL, ",");
+    }
+
+    int b[count2];
+    for (int i = 0; i < count2; i++)
+        b[i] = arr2[i];
+
+    int M = sizeof(b) / sizeof(b[0]); // size of array
+
+    // -----------
 
     int nopts[N + 2];         // Array of top of stacks
     int option[N + 2][N + 2]; // Array of stacks of options
@@ -82,24 +99,24 @@ int main(int argc, char *argv[])
                     // printf("\n");
 
                     int solu = 0;
-                    for (i = 0; i < subsol_size; i++)
+                    for (i = 0; i < M; i++)
                     {
                         for (int j = 1; j < move; j++)
                         {
-                            if (option[j][nopts[j]] == subsol[i])
+                            if (option[j][nopts[j]] == b[i])
                             {
                                 solu++;
                             }
                         }
                     }
-                    if (solu == subsol_size)
+                    if (solu == M)
                     {
                         for (int j = 1; j < move; j++)
                         {
                             printf("%2i ", option[j][nopts[j]]);
                         }
+                        printf("\n");
                     }
-                    printf("\n");
                     solu = 0;
                 }
             }
