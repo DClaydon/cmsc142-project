@@ -49,7 +49,7 @@ int main() {
         for (int j = 1; j <= target; j++) {
             if (set[i] <= j) {
                 // Include or exclude the current element
-                dp[i][j] = dp[i - 1][j] || dp[i - 1][j - set[i]];
+                dp[i][j] = dp[i - 1][j] || dp[i - 1][j - set[i]]; //Cell = max([i-1],[i-1][j-set[i]])
             } else {
                 // Exclude the current element
                 dp[i][j] = dp[i - 1][j];
